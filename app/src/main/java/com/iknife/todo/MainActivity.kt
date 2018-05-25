@@ -8,6 +8,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var adapter: TaskListAdapter
+
+    var tasksList = arrayListOf<Task>(Task("Task 1"), Task("Task 2"), Task("Task 3"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,5 +19,9 @@ class MainActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
 
         task_list.layoutManager = linearLayoutManager
+
+        adapter = TaskListAdapter(tasksList)
+
+        task_list.adapter = adapter
     }
 }
