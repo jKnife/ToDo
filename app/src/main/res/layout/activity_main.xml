@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/task_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"/>
+
     <com.github.clans.fab.FloatingActionMenu
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,10 +44,4 @@
 
 
     </com.github.clans.fab.FloatingActionMenu>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/task_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
 </RelativeLayout>
