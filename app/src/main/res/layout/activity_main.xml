@@ -9,7 +9,7 @@
     <com.github.clans.fab.FloatingActionMenu
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/floatingActionMenu"
+        android:id="@+id/fab"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
