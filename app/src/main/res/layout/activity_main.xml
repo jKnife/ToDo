@@ -1,23 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.github.clans.fab.FloatingActionMenu
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/floatingActionMenu"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        app:menu_labels_showShadow="true"
+        app:menu_fab_label=""
+        app:menu_openDirection="up"
+        app:menu_backgroundColor="@android:color/transparent">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="59dp"
-        android:layout_height="59dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:clickable="true"
-        app:backgroundTint="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="@android:drawable/btn_dialog"
-        app:srcCompat="@android:drawable/ic_input_add" />
-</android.support.constraint.ConstraintLayout>
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="@string/project"
+            app:fab_size="mini"
+            android:id="@+id/floatingActionItemProject"
+            android:src="@drawable/plus" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="@string/task"
+            app:fab_size="mini"
+            android:id="@+id/floatingActionItemTask"
+            android:src="@drawable/olowek" />
+
+
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+
+
+
+
+</RelativeLayout>

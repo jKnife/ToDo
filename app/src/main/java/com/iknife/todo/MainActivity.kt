@@ -16,10 +16,10 @@ class MainActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fab : FloatingActionButton = fab
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Elo", Snackbar.LENGTH_LONG).setAction("Action",null).show()
-        }
+       // val fab : FloatingActionButton = fab
+       // fab.setOnClickListener { view ->
+        //    Snackbar.make(view, "Elo", Snackbar.LENGTH_LONG).setAction("Action",null).show()
+       // }
 
     }
 
