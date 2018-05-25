@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity()
 
         val fabProject : com.github.clans.fab.FloatingActionButton = floatingActionItemProject
         fabProject.setOnClickListener { view ->
-            Snackbar.make(view, "Project created", Snackbar.LENGTH_LONG).setAction("Action",null).show()
+            val intent = Intent(this, CreateProjectActivity::class.java)
+            startActivity(intent)
         }
 
     }
