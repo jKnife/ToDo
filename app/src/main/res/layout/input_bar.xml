@@ -7,6 +7,8 @@
     android:background="@color/colorPrimary"
     android:layout_gravity="bottom">
         <EditText
+            android:imeOptions="actionDone"
+            android:id="@+id/input_bar"
             android:hint="@string/new_task"
             android:inputType="text"
             android:background="@android:color/white"
