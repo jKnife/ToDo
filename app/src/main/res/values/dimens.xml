@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="input_bar_height">45dp</dimen>
+    <dimen name="input_bar_field_margin_horizontal">5dp</dimen>
+    <dimen name="input_bar_field_margin_vertical">3.5dp</dimen>
+</resources>
