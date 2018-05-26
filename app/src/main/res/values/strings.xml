@@ -1,5 +1,3 @@
 <resources>
     <string name="app_name">ToDo</string>
-    <string name="project">Create new project</string>
-    <string name="task">Create task</string>
 </resources>
