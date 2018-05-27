@@ -3,23 +3,18 @@ package com.iknife.todo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
-import android.view.KeyEvent
-import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
-import com.iknife.todo.R.id.input_bar
+import com.iknife.todo.database.TaskData
+import com.iknife.todo.database.TasksDatabase
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.input_bar.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: TaskListAdapter
 
-    var tasksList = arrayListOf<Task>()
+    private var tasksList = mutableListOf<Task>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,17 +28,22 @@ class MainActivity : AppCompatActivity() {
 
         task_list.adapter = adapter
 
-        val inputBar : EditText = findViewById(input_bar)
+        val database = TasksDatabase.getInstance(this)
 
-        inputBar.setOnEditorActionListener { v, actionId, event ->
-            var handled: Boolean = false
+        val tasksFromDB = database?.tasksDataDao()?.getTasks()!!
+        tasksFromDB.forEach {
+            tasksList.add(it)
+        }
+
+        input_bar.setOnEditorActionListener { _, actionId, _ ->
+            val handled = false
             if(actionId == EditorInfo.IME_ACTION_DONE){
-                tasksList.add(Task(inputBar.text.toString()))
-               // Toast.makeText(applicationContext, "h", Toast.LENGTH_SHORT).show()
+                val newTask = Task(input_bar.text.toString())
+                database.tasksDataDao().addTask(TaskData(null, newTask.label))
+                tasksList.add(newTask)
             }
             handled
         }
-
 
 
     }

@@ -5,9 +5,9 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 
-@Database(entities = [(TasksData::class)],version = 1)
+@Database(entities = [(TaskData::class)],version = 1)
 abstract class TasksDatabase : RoomDatabase(){
-    abstract fun TasksDataDao() : TasksDataDao
+    abstract fun tasksDataDao() : TasksDataDao
 
     companion object {
         private var INSTANCE: TasksDatabase? = null
@@ -17,6 +17,7 @@ abstract class TasksDatabase : RoomDatabase(){
                 synchronized(TasksDatabase::class) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
                             TasksDatabase::class.java, "tasks.db")
+                            .allowMainThreadQueries()
                             .build()
                 }
             }

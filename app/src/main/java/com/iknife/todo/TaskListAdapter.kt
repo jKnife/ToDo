@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.task_entry.view.*
 
-class TaskListAdapter(private val tasksCollection : ArrayList<Task>) : RecyclerView.Adapter<TaskListAdapter.TaskHolder>(){
+class TaskListAdapter(private val tasksCollection : List<Task>) : RecyclerView.Adapter<TaskListAdapter.TaskHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskListAdapter.TaskHolder{
         val inflatedView = parent.inflate(R.layout.task_entry, false)
