@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
                 val input = input_bar.text.toString()
                 database.tasksDataDao().addTask(TaskData(null, input))
                 tasksList.add(Task(tasksList.size.toLong(), input))
+                input_bar.text.clear()
             }
             handled
         }
