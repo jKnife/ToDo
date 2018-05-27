@@ -8,12 +8,12 @@ import com.iknife.todo.Task
 
 @Dao
 interface TasksDataDao{
-    @Query("SELECT * FROM tasksData")
-    fun getTasks(): ArrayList<Task>
+    @Query("SELECT * FROM taskData")
+    fun getTasks(): List<Task>
 
-    @Query("DELETE FROM tasksData")
+    @Query("DELETE FROM taskData")
     fun purgeTasks()
 
     @Insert(onConflict = REPLACE)
-    fun addTask(tasksData: TasksData)
+    fun addTask(taskData: TaskData)
 }
