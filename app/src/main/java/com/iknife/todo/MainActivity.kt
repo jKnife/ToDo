@@ -20,21 +20,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Setup RecyclerView
         linearLayoutManager = LinearLayoutManager(this)
-
         task_list.layoutManager = linearLayoutManager
-
         adapter = TaskListAdapter(tasksList)
-
         task_list.adapter = adapter
 
+        //Get database instance
         val database = TasksDatabase.getInstance(this)
 
+        //Populate RecyclerView with data from database
         val tasksFromDB = database?.tasksDataDao()?.getTasks()!!
         tasksFromDB.forEach {
             tasksList.add(it)
         }
 
+        //Set Input Bar keyboard-submit to create a new task and add it to both DB and in-memory List
         input_bar.setOnEditorActionListener { _, actionId, _ ->
             val handled = false
             if(actionId == EditorInfo.IME_ACTION_DONE){
