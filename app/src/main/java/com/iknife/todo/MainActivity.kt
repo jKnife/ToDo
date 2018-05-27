@@ -27,13 +27,19 @@ class MainActivity : AppCompatActivity() {
         //Setup RecyclerView
         linearLayoutManager = LinearLayoutManager(this)
         task_list.layoutManager = linearLayoutManager
-        adapter = TaskListAdapter(tasksList, database)
+        adapter = TaskListAdapter(tasksList){
+            val task = it
+            Log.e("TasksDatabase", "Deleting task id:${task.id}")
+            database?.tasksDataDao()?.deleteTask(TaskData(task.id, task.label))
+            val taskInList = tasksList.first{it.id == task.id}
+            this.adapter.notifyItemRemoved(tasksList.indexOf(taskInList))
+            tasksList.remove(taskInList)
+        }
         task_list.adapter = adapter
 
         //Populate RecyclerView with data from database
         val tasksFromDB = database?.tasksDataDao()?.getTasks()!!
         tasksFromDB.forEach {
-            Log.e("TaskList", "Adding task to in-memory storage: ${it.id}--${it.label}")
             tasksList.add(it)
         }
 
