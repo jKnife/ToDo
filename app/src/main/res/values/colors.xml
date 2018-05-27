@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#d7de1d</color>
-    <color name="colorPrimaryDark">#d0de49</color>
-    <color name="colorAccent">#ffffff</color>
+    <color name="colorPrimary">#5d99c6</color>
+    <color name="colorPrimaryDark">#3b52d2</color>
+    <color name="colorAccent">#b2fef7</color>
+    <color name="cardViewBackground">#80deea</color>
 </resources>
