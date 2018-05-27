@@ -3,6 +3,7 @@ package com.iknife.todo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.inputmethod.EditorInfo
 import com.iknife.todo.database.TaskData
 import com.iknife.todo.database.TasksDatabase
@@ -20,18 +21,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Get database instance
+        val database = TasksDatabase.getInstance(this)
+
         //Setup RecyclerView
         linearLayoutManager = LinearLayoutManager(this)
         task_list.layoutManager = linearLayoutManager
-        adapter = TaskListAdapter(tasksList)
+        adapter = TaskListAdapter(tasksList, database)
         task_list.adapter = adapter
-
-        //Get database instance
-        val database = TasksDatabase.getInstance(this)
 
         //Populate RecyclerView with data from database
         val tasksFromDB = database?.tasksDataDao()?.getTasks()!!
         tasksFromDB.forEach {
+            Log.e("TaskList", "Adding task to in-memory storage: ${it.id}--${it.label}")
             tasksList.add(it)
         }
 
@@ -39,9 +41,9 @@ class MainActivity : AppCompatActivity() {
         input_bar.setOnEditorActionListener { _, actionId, _ ->
             val handled = false
             if(actionId == EditorInfo.IME_ACTION_DONE){
-                val newTask = Task(input_bar.text.toString())
-                database.tasksDataDao().addTask(TaskData(null, newTask.label))
-                tasksList.add(newTask)
+                val input = input_bar.text.toString()
+                database.tasksDataDao().addTask(TaskData(null, input))
+                tasksList.add(Task(tasksList.size.toLong(), input))
             }
             handled
         }
