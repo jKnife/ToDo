@@ -1,6 +1,7 @@
 package com.iknife.todo.database
 
 import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.Query
@@ -16,4 +17,7 @@ interface TasksDataDao{
 
     @Insert(onConflict = REPLACE)
     fun addTask(taskData: TaskData)
+
+    @Delete
+    fun deleteTask(taskData: TaskData)
 }
