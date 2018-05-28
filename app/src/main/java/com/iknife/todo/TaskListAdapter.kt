@@ -35,7 +35,7 @@ class TaskListAdapter(private val tasksCollection : MutableList<Task>) : Recycle
 
     class TaskHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
-        private var context: Context = v.context
+        private val context: Context = v.context
         private var view = v
         private var task: Task = Task(999, "No label")
 
@@ -45,6 +45,7 @@ class TaskListAdapter(private val tasksCollection : MutableList<Task>) : Recycle
 
         override fun onClick(v: View?){
             val intent = Intent(context,TaskInfoActivity::class.java)
+            intent.putExtra("task_text", task.label )
             context.startActivity(intent)
         }
 
