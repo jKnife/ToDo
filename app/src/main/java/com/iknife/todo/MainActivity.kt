@@ -3,6 +3,8 @@ package com.iknife.todo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
 import android.view.inputmethod.EditorInfo
 import com.iknife.todo.database.TaskData
@@ -36,6 +38,16 @@ class MainActivity : AppCompatActivity() {
             tasksList.remove(taskInList)
         }
         task_list.adapter = adapter
+
+        //Implement fling callback
+        val flingCallback = object: FlingToDeleteCallback(){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+                adapter.removeTask(viewHolder!!.adapterPosition, database)
+            }
+        }
+        //Attach Touch Helper to Recycler View
+        val taskTouchHelper = ItemTouchHelper(flingCallback)
+        taskTouchHelper.attachToRecyclerView(task_list)
 
         //Populate RecyclerView with data from database
         val tasksFromDB = database?.tasksDataDao()?.getTasks()!!
