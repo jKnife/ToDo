@@ -4,46 +4,56 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import android.view.KeyEvent
-import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
-import com.iknife.todo.R.id.input_bar
+import com.iknife.todo.database.TaskData
+import com.iknife.todo.database.TasksDatabase
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.input_bar.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: TaskListAdapter
 
-    var tasksList = arrayListOf<Task>()
+    private var tasksList = mutableListOf<Task>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Get database instance
+        val database = TasksDatabase.getInstance(this)
+
+        //Setup RecyclerView
         linearLayoutManager = LinearLayoutManager(this)
-
         task_list.layoutManager = linearLayoutManager
-
-        adapter = TaskListAdapter(tasksList)
-
+        adapter = TaskListAdapter(tasksList){
+            val task = it
+            Log.e("TasksDatabase", "Deleting task id:${task.id}")
+            database?.tasksDataDao()?.deleteTask(TaskData(task.id, task.label))
+            val taskInList = tasksList.first{it.id == task.id}
+            this.adapter.notifyItemRemoved(tasksList.indexOf(taskInList))
+            tasksList.remove(taskInList)
+        }
         task_list.adapter = adapter
 
-        val inputBar : EditText = findViewById(input_bar)
+        //Populate RecyclerView with data from database
+        val tasksFromDB = database?.tasksDataDao()?.getTasks()!!
+        tasksFromDB.forEach {
+            tasksList.add(it)
+        }
 
-        inputBar.setOnEditorActionListener { v, actionId, event ->
-            var handled: Boolean = false
+        //Set Input Bar keyboard-submit to create a new task and add it to both DB and in-memory List
+        input_bar.setOnEditorActionListener { _, actionId, _ ->
+            val handled = false
             if(actionId == EditorInfo.IME_ACTION_DONE){
-                tasksList.add(Task(inputBar.text.toString()))
-               // Toast.makeText(applicationContext, "h", Toast.LENGTH_SHORT).show()
+                val input = input_bar.text.toString()
+                database.tasksDataDao().addTask(TaskData(null, input))
+                tasksList.add(Task(tasksList.size.toLong(), input))
+                input_bar.text.clear()
             }
             handled
         }
-
 
 
     }
