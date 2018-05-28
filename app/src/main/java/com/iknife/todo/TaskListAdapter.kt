@@ -37,7 +37,7 @@ class TaskListAdapter(private val tasksCollection : List<Task>, private val hold
         }
 
         override fun onClick(v: View?){
-            holderOnClick(this.task)
+            //holderOnClick(this.task)
             val intent = Intent(context,TaskInfoActivity::class.java)
             context.startActivity(intent)
         }
