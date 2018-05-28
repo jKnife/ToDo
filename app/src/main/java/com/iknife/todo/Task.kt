@@ -1,3 +1,3 @@
 package com.iknife.todo
 
-class Task(var label: String)
+class Task(val id: Long, val label: String)
