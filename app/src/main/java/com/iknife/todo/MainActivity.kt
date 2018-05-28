@@ -29,14 +29,7 @@ class MainActivity : AppCompatActivity() {
         //Setup RecyclerView
         linearLayoutManager = LinearLayoutManager(this)
         task_list.layoutManager = linearLayoutManager
-        adapter = TaskListAdapter(tasksList){
-            val task = it
-            Log.e("TasksDatabase", "Deleting task id:${task.id}")
-            database?.tasksDataDao()?.deleteTask(TaskData(task.id, task.label))
-            val taskInList = tasksList.first{it.id == task.id}
-            this.adapter.notifyItemRemoved(tasksList.indexOf(taskInList))
-            tasksList.remove(taskInList)
-        }
+        adapter = TaskListAdapter(tasksList)
         task_list.adapter = adapter
 
         //Implement fling callback

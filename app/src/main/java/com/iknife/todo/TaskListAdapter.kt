@@ -10,11 +10,11 @@ import com.iknife.todo.database.TaskData
 import com.iknife.todo.database.TasksDatabase
 import kotlinx.android.synthetic.main.task_entry.view.*
 
-class TaskListAdapter(private val tasksCollection : MutableList<Task>, private val holderOnClick: (Task) -> Unit) : RecyclerView.Adapter<TaskListAdapter.TaskHolder>(){
+class TaskListAdapter(private val tasksCollection : MutableList<Task>) : RecyclerView.Adapter<TaskListAdapter.TaskHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskListAdapter.TaskHolder{
         val inflatedView = parent.inflate(R.layout.task_entry, false)
-        return TaskHolder(inflatedView, holderOnClick)
+        return TaskHolder(inflatedView)
     }
 
     override fun getItemCount(): Int = tasksCollection.size
@@ -33,7 +33,7 @@ class TaskListAdapter(private val tasksCollection : MutableList<Task>, private v
         tasksCollection.removeAt(position)
     }
 
-    class TaskHolder(v: View, private val holderOnClick: (Task) -> Unit) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    class TaskHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         private var context: Context = v.context
         private var view = v
@@ -44,7 +44,6 @@ class TaskListAdapter(private val tasksCollection : MutableList<Task>, private v
         }
 
         override fun onClick(v: View?){
-            holderOnClick(this.task)
             val intent = Intent(context,TaskInfoActivity::class.java)
             context.startActivity(intent)
         }
