@@ -1,20 +1,20 @@
 package com.iknife.todo
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
-import android.support.design.widget.Snackbar
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import com.iknife.todo.database.TaskData
+import com.iknife.todo.database.TasksDatabase
 import kotlinx.android.synthetic.main.task_entry.view.*
 
-class TaskListAdapter(private val tasksCollection : List<Task>, private val holderOnClick: (Task) -> Unit) : RecyclerView.Adapter<TaskListAdapter.TaskHolder>(){
+class TaskListAdapter(private val tasksCollection : MutableList<Task>) : RecyclerView.Adapter<TaskListAdapter.TaskHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskListAdapter.TaskHolder{
         val inflatedView = parent.inflate(R.layout.task_entry, false)
-        return TaskHolder(inflatedView, holderOnClick)
+        return TaskHolder(inflatedView)
     }
 
     override fun getItemCount(): Int = tasksCollection.size
@@ -26,7 +26,14 @@ class TaskListAdapter(private val tasksCollection : List<Task>, private val hold
 
     }
 
-    class TaskHolder(v: View, private val holderOnClick: (Task) -> Unit) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    fun removeTask(position: Int, database: TasksDatabase?){
+        Log.e("TasksDatabase", "Deleting task id:${tasksCollection[position].id}")
+        database?.tasksDataDao()?.deleteTask(TaskData(tasksCollection[position].id, tasksCollection[position].label))
+        notifyItemRemoved(position)
+        tasksCollection.removeAt(position)
+    }
+
+    class TaskHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         private val context: Context = v.context
         private var view = v
@@ -37,7 +44,6 @@ class TaskListAdapter(private val tasksCollection : List<Task>, private val hold
         }
 
         override fun onClick(v: View?){
-            //holderOnClick(this.task)
             val intent = Intent(context,TaskInfoActivity::class.java)
             intent.putExtra("task_text", task.label )
             context.startActivity(intent)

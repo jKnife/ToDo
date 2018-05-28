@@ -3,6 +3,8 @@ package com.iknife.todo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
 import android.view.inputmethod.EditorInfo
 import com.iknife.todo.database.TaskData
@@ -27,15 +29,18 @@ class MainActivity : AppCompatActivity() {
         //Setup RecyclerView
         linearLayoutManager = LinearLayoutManager(this)
         task_list.layoutManager = linearLayoutManager
-        adapter = TaskListAdapter(tasksList){
-            val task = it
-            Log.e("TasksDatabase", "Deleting task id:${task.id}")
-            database?.tasksDataDao()?.deleteTask(TaskData(task.id, task.label))
-            val taskInList = tasksList.first{it.id == task.id}
-            this.adapter.notifyItemRemoved(tasksList.indexOf(taskInList))
-            tasksList.remove(taskInList)
-        }
+        adapter = TaskListAdapter(tasksList)
         task_list.adapter = adapter
+
+        //Implement fling callback
+        val flingCallback = object: FlingToDeleteCallback(){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+                adapter.removeTask(viewHolder!!.adapterPosition, database)
+            }
+        }
+        //Attach Touch Helper to Recycler View
+        val taskTouchHelper = ItemTouchHelper(flingCallback)
+        taskTouchHelper.attachToRecyclerView(task_list)
 
         //Populate RecyclerView with data from database
         val tasksFromDB = database?.tasksDataDao()?.getTasks()!!
