@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.task_entry.view.*
 
@@ -40,6 +41,7 @@ class TaskListAdapter(private val tasksCollection : ArrayList<Task>) : RecyclerV
 
         override fun onClick(v: View?) {
             val intent = Intent(context,TaskInfoActivity::class.java)
+            intent.putExtra("task_text", task.label )
             context.startActivity(intent)
         }
 
