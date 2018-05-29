@@ -44,9 +44,7 @@ class TaskListAdapter(private val tasksCollection : MutableList<Task>) : Recycle
         }
 
         override fun onClick(v: View?){
-            val intent = Intent(context,TaskInfoActivity::class.java)
-            intent.putExtra("task_text", task.label )
-            context.startActivity(intent)
+            //Item on click
         }
 
         companion object {
