@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         android:paddingTop="10dp"
+        android:clipToPadding="false"
         android:background="@color/secondaryLightColor"
         android:paddingBottom="@dimen/input_bar_height"/>
 
