@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:paddingTop="5dp"
-        android:background="@color/colorAccent"
+        android:paddingTop="10dp"
+        android:background="@color/secondaryLightColor"
         android:paddingBottom="@dimen/input_bar_height"/>
 
     <LinearLayout

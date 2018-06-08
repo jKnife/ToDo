@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#5d99c6</color>
-    <color name="colorPrimaryDark">#3b52d2</color>
-    <color name="colorAccent">#b2fef7</color>
-    <color name="cardViewBackground">#80deea</color>
+    <color name="primaryColor">#4db6ac</color>
+    <color name="primaryLightColor">#82e9de</color>
+    <color name="primaryDarkColor">#00867d</color>
+    <color name="secondaryColor">#5d4037</color>
+    <color name="secondaryLightColor">#8b6b61</color>
+    <color name="secondaryDarkColor">#321911</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#ffffff</color>
+    <color name="taskCard">#80ffffff</color>
 </resources>
