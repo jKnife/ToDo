@@ -3,4 +3,7 @@
     <string name="new_task">Enter new task</string>
     <string name="task_text">Task</string>
     <string name="task_info_test">Task Test</string>
+    <string name="set_time">Set time</string>
+    <string name="priority">Priority</string>
+    <string name="register_task">Register task</string>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_alignStart="@id/input_bar"
@@ -9,7 +10,7 @@
         android:layout_alignRight="@id/input_bar"
         android:weightSum="1">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:weightSum="100"
             android:orientation="horizontal"
@@ -19,10 +20,11 @@
                 android:id="@+id/button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:text="Set time"
                 android:layout_weight="50"
+                android:text="@string/set_time"
                 android:fontFamily="sans-serif-light"
-                android:background="@drawable/input_bar_field_background" />
+                android:background="@drawable/input_bar_field_background"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/priority"
@@ -31,7 +33,8 @@
                 android:layout_weight="50"
                 android:fontFamily="sans-serif-light"
                 android:background="@drawable/input_bar_field_background"
-                android:text="Priority" />
+                android:text="@string/priority"
+                tools:ignore="ButtonStyle" />
 
         </LinearLayout>
         <ImageButton
@@ -39,5 +42,6 @@
             android:layout_width="45dp"
             android:background="@drawable/input_bar_field_background"
             android:layout_height="45dp"
-            android:src="@drawable/done" />
+            android:src="@drawable/done"
+            android:contentDescription="@string/register_task" />
     </LinearLayout>
