@@ -3,4 +3,6 @@
     <string name="new_task">Enter new task</string>
     <string name="task_text">Task</string>
     <string name="task_info_test">Task Test</string>
+    <string name="close">Close</string>
+    <string name="open">Open</string>
 </resources>

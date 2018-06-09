@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/cos" android:title="Zadania" />
+    <item android:id="@+id/cos2" android:title="Listy"/>
+    <item android:id="@+id/cos3" android:title="Ustawienia"/>
+
+
+</menu>
