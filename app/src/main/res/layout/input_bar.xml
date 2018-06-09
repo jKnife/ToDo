@@ -16,12 +16,14 @@
         android:layout_alignEnd="@id/input_bar"
         android:layout_above="@id/input_bar"
         android:layout_alignLeft="@id/input_bar"
-        android:layout_alignRight="@id/input_bar">
+        android:layout_alignRight="@id/input_bar"
+        android:weightSum="1">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:weightSum="100"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
             <Button
                 android:id="@+id/button"
