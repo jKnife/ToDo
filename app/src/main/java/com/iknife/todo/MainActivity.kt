@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         val firstCompleted = tasksList.indexOfFirst { it.completed }
 
+
         //Setup RecyclerView
         linearLayoutManager = LinearLayoutManager(this)
         task_list.layoutManager = linearLayoutManager
@@ -47,9 +48,9 @@ class MainActivity : AppCompatActivity() {
 
         //Setup Sectioned list
         var sections = arrayListOf<SimpleSectionedRecyclerViewAdapter.Section>()
-
         if (tasksList.size > 0) sections.add(SimpleSectionedRecyclerViewAdapter.Section(0, "To Do"))
         if (firstCompleted != -1) sections.add(SimpleSectionedRecyclerViewAdapter.Section(firstCompleted, "Completed"))
+
 
         val dummy = arrayOfNulls<SimpleSectionedRecyclerViewAdapter.Section>(sections.size)
         val mSectionedAdapter = SimpleSectionedRecyclerViewAdapter(this, R.layout.section, R.id.section_text, adapter)
@@ -59,7 +60,8 @@ class MainActivity : AppCompatActivity() {
         //Implement fling callback
         val flingCallback = object: FlingToDeleteCallback(){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
-                adapter.removeTask(viewHolder!!.adapterPosition, database)
+                adapter.completeTask(viewHolder!!.adapterPosition, database)
+                updateSections(sections, task_list.adapter as SimpleSectionedRecyclerViewAdapter, database)
             }
         }
         //Attach Touch Helper to Recycler View
@@ -79,5 +81,22 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    fun updateSections(sections: ArrayList<SimpleSectionedRecyclerViewAdapter.Section>, adapter: SimpleSectionedRecyclerViewAdapter, database: TasksDatabase) {
+        tasksList.clear()
+        val tasksFromDB = database?.tasksDataDao()?.getTasks()!!
+        tasksFromDB.forEach {
+            tasksList.add(it)
+        }
+        tasksList.sortBy {
+            it.completed
+        }
+
+        val firstCompleted = tasksList.indexOfFirst { it.completed }
+        if (firstCompleted != -1) sections[1] = (SimpleSectionedRecyclerViewAdapter.Section(firstCompleted, "Completed"))
+
+        val dummy = arrayOfNulls<SimpleSectionedRecyclerViewAdapter.Section>(sections.size)
+        adapter.setSections(sections.toArray(dummy))
     }
 }
