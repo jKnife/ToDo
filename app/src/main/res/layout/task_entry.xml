@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="@string/task_text"
-            android:textColor="@color/primaryTextColor"
+            android:textColor="#000000"
             android:textSize="18sp"
             android:fontFamily="sans-serif-light"
             />
