@@ -3,19 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/input_bar_height"
     android:layout_gravity="bottom"
-    android:background="#ffffff"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="7dp">
 
         <EditText
             android:id="@+id/input_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/input_bar_field_margin_vertical"
-            android:layout_marginLeft="@dimen/input_bar_field_margin_horizontal"
-            android:layout_marginRight="@dimen/input_bar_field_margin_horizontal"
-            android:layout_marginTop="@dimen/input_bar_field_margin_vertical"
-            android:background="@android:color/white"
             android:hint="@string/new_task"
             android:imeOptions="actionDone"
-            android:inputType="text" />
+            android:inputType="text"
+            android:background="@drawable/input_bar_field_background"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp"
+            android:paddingEnd="16dp"
+            android:paddingRight="16dp"
+            android:fontFamily="sans-serif-light"/>
 </LinearLayout>
