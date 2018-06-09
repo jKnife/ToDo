@@ -1,3 +1,13 @@
 package com.iknife.todo
 
-class Task(val id: Long, val label: String, var completed: Boolean)
+import com.iknife.todo.database.TaskData
+
+class Task(val id: Long, val label: String, var completed: Boolean){
+    fun toggleCompleted() {
+        this.completed = completed.not()
+    }
+
+    fun toTaskData(): TaskData {
+        return TaskData(this.id, this.label, this.completed)
+    }
+}
