@@ -28,7 +28,7 @@ class TaskListAdapter(private val tasksCollection : MutableList<Task>) : Recycle
 
     fun removeTask(position: Int, database: TasksDatabase?){
         Log.e("TasksDatabase", "Deleting task id:${tasksCollection[position].id}")
-        database?.tasksDataDao()?.deleteTask(TaskData(tasksCollection[position].id, tasksCollection[position].label))
+        database?.tasksDataDao()?.deleteTask(TaskData(tasksCollection[position].id, tasksCollection[position].label, tasksCollection[position].completed))
         notifyItemRemoved(position)
         tasksCollection.removeAt(position)
     }
@@ -37,7 +37,7 @@ class TaskListAdapter(private val tasksCollection : MutableList<Task>) : Recycle
 
         private val context: Context = v.context
         private var view = v
-        private var task: Task = Task(999, "No label")
+        private var task: Task = Task(999, "No label", false)
 
         init {
             v.setOnClickListener(this)

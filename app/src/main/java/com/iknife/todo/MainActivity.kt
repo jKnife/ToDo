@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
         //Setup Sectioned list
         var sections = arrayListOf<SimpleSectionedRecyclerViewAdapter.Section>()
 
-        sections.add(SimpleSectionedRecyclerViewAdapter.Section(0, "To Do"))
-        sections.add(SimpleSectionedRecyclerViewAdapter.Section(4, "Completed"))
+        //sections.add(SimpleSectionedRecyclerViewAdapter.Section(0, "To Do"))
+        //sections.add(SimpleSectionedRecyclerViewAdapter.Section(4, "Completed"))
 
         val dummy = arrayOfNulls<SimpleSectionedRecyclerViewAdapter.Section>(sections.size)
         val mSectionedAdapter = SimpleSectionedRecyclerViewAdapter(this, R.layout.section, R.id.section_text, adapter)
@@ -66,8 +66,8 @@ class MainActivity : AppCompatActivity() {
             val handled = false
             if(actionId == EditorInfo.IME_ACTION_DONE){
                 val input = input_bar.text.toString()
-                database.tasksDataDao().addTask(TaskData(null, input))
-                tasksList.add(Task(tasksList.size.toLong(), input))
+                database.tasksDataDao().addTask(TaskData(null, input, false))
+                tasksList.add(Task(tasksList.size.toLong(), input, false))
                 input_bar.text.clear()
             }
             handled
