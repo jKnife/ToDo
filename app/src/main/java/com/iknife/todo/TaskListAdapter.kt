@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.iknife.todo.database.TaskData
 import com.iknife.todo.database.TasksDatabase
 import kotlinx.android.synthetic.main.task_entry.view.*
@@ -29,6 +30,16 @@ class TaskListAdapter(private val tasksCollection : MutableList<Task>) : Recycle
     fun removeTask(position: Int, database: TasksDatabase?){
         Log.e("TasksDatabase", "Deleting task id:${tasksCollection[position].id}")
         database?.tasksDataDao()?.deleteTask(TaskData(tasksCollection[position].id, tasksCollection[position].label, tasksCollection[position].completed))
+        notifyItemRemoved(position)
+        tasksCollection.removeAt(position)
+    }
+
+    fun completeTask(position: Int, database: TasksDatabase?){
+        val task = tasksCollection[position-1]
+        task.toggleCompleted()
+        Log.i("CREATED TASK", "${task.id}, ${task.label}, ${task.completed}")
+        database?.tasksDataDao()?.addTask(task.toTaskData())
+        tasksCollection.add(task)
         notifyItemRemoved(position)
         tasksCollection.removeAt(position)
     }
