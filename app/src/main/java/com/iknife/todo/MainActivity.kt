@@ -11,6 +11,9 @@ import com.iknife.todo.database.TaskData
 import com.iknife.todo.database.TasksDatabase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.input_bar.*
+import java.nio.file.Files.size
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,8 +33,18 @@ class MainActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
         task_list.layoutManager = linearLayoutManager
         adapter = TaskListAdapter(tasksList)
-        task_list.adapter = adapter
 
+        //Setup Sectioned list
+        var sections = arrayListOf<SimpleSectionedRecyclerViewAdapter.Section>()
+
+        sections.add(SimpleSectionedRecyclerViewAdapter.Section(0, "To Do"))
+        sections.add(SimpleSectionedRecyclerViewAdapter.Section(4, "Completed"))
+
+        val dummy = arrayOfNulls<SimpleSectionedRecyclerViewAdapter.Section>(sections.size)
+        val mSectionedAdapter = SimpleSectionedRecyclerViewAdapter(this, R.layout.section, R.id.section_text, adapter)
+        mSectionedAdapter.setSections(sections.toArray(dummy))
+
+        task_list.adapter = mSectionedAdapter
         //Implement fling callback
         val flingCallback = object: FlingToDeleteCallback(){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
