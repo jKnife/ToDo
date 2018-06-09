@@ -13,7 +13,7 @@
         android:scrollbars="vertical"
         android:paddingTop="10dp"
         android:clipToPadding="false"
-        android:paddingBottom="@dimen/input_bar_height"/>
+        android:paddingBottom="115dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
         android:orientation="vertical">
 
         <include layout="@layout/input_bar"
-            android:layout_height="@dimen/input_bar_height"
+            android:layout_height="130dp"
             android:layout_width="match_parent"/>
 
     </LinearLayout>

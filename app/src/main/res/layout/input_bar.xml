@@ -1,22 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/input_bar_height"
-    android:layout_gravity="bottom"
-    android:orientation="horizontal"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="7dp">
 
-        <EditText
-            android:id="@+id/input_bar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/new_task"
-            android:imeOptions="actionDone"
-            android:inputType="text"
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/input_bar"
+        android:layout_alignEnd="@id/input_bar"
+        android:layout_above="@id/input_bar"
+        android:layout_alignLeft="@id/input_bar"
+        android:layout_alignRight="@id/input_bar">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:weightSum="100"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:text="Set time"
+                android:layout_weight="50"
+
+                android:layout_marginBottom="5dp"
+                android:fontFamily="sans-serif-light"
+                android:background="@drawable/input_bar_field_background" />
+
+            <Button
+                android:id="@+id/priority"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="50"
+                android:layout_marginBottom="5dp"
+
+                android:fontFamily="sans-serif-light"
+                android:background="@drawable/input_bar_field_background"
+                android:text="Priority" />
+
+        </LinearLayout>
+        <ImageButton
+            android:id="@+id/fajka"
+            android:layout_width="45dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/input_bar_field_background"
-            android:paddingStart="16dp"
-            android:paddingLeft="16dp"
-            android:paddingEnd="16dp"
-            android:paddingRight="16dp"
-            android:fontFamily="sans-serif-light"/>
-</LinearLayout>
+            android:layout_height="45dp"
+
+            android:src="@drawable/done" />
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/input_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_bar_height"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/input_bar_field_background"
+        android:fontFamily="sans-serif-light"
+        android:hint="@string/new_task"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingStart="16dp"
+         />
+</RelativeLayout>
