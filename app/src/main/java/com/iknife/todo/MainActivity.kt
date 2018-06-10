@@ -5,14 +5,11 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
-import android.util.Log
 import android.view.inputmethod.EditorInfo
 import com.iknife.todo.database.TaskData
 import com.iknife.todo.database.TasksDatabase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.input_bar.*
-import java.nio.file.Files.size
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -58,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         task_list.adapter = mSectionedAdapter
         //Implement fling callback
-        val flingCallback = object: FlingToDeleteCallback(){
+        val flingCallback = object : FlingToDeleteCallback() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
                 adapter.completeTask(viewHolder!!.adapterPosition, database)
                 updateSections(sections, task_list.adapter as SimpleSectionedRecyclerViewAdapter, database)
@@ -71,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         //Set Input Bar keyboard-submit to create a new task and add it to both DB and in-memory List
         input_bar.setOnEditorActionListener { _, actionId, _ ->
             val handled = false
-            if(actionId == EditorInfo.IME_ACTION_DONE){
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 val input = input_bar.text.toString()
                 database.tasksDataDao().addTask(TaskData(null, input, false))
                 tasksList.add(Task(tasksList.size.toLong(), input, false))
@@ -83,9 +80,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun updateSections(sections: ArrayList<SimpleSectionedRecyclerViewAdapter.Section>, adapter: SimpleSectionedRecyclerViewAdapter, database: TasksDatabase) {
+    private fun updateSections(sections: ArrayList<SimpleSectionedRecyclerViewAdapter.Section>, adapter: SimpleSectionedRecyclerViewAdapter, database: TasksDatabase) {
         tasksList.clear()
-        val tasksFromDB = database?.tasksDataDao()?.getTasks()!!
+        val tasksFromDB = database.tasksDataDao().getTasks()
         tasksFromDB.forEach {
             tasksList.add(it)
         }
