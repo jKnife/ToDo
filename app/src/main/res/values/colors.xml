@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#5d99c6</color>
-    <color name="colorPrimaryDark">#3b52d2</color>
-    <color name="colorAccent">#b2fef7</color>
-    <color name="cardViewBackground">#80deea</color>
+    <color name="taskCard">#ccffffff</color>
+    <color name="inputBarField">#f5ffffff</color>
+
+    <color name="primaryColor_Beach">#74d0ec</color>
+    <color name="primaryLightColor_Beach">#a9ffff</color>
+    <color name="primaryDarkColor_Beach">#3c9fba</color>
+    <color name="secondaryColor_Beach">#e2bd56</color>
+    <color name="secondaryLightColor_Beach">#ffef86</color>
+    <color name="secondaryDarkColor_Beach">#ad8d26</color>
+    <color name="primaryTextColo_Beach">#000000</color>
+    <color name="secondaryTextColor_Beach">#000000</color>
+
+    <color name="primaryColor_Forest">#66bb6a</color>
+    <color name="primaryLightColor_Forest">#98ee99</color>
+    <color name="primaryDarkColor_Forest">#338a3e</color>
+    <color name="secondaryColor_Forest">#8b6b61</color>
+    <color name="secondaryLightColor_Forest">#bc998e</color>
+    <color name="secondaryDarkColor_Forest">#5d4037</color>
+    <color name="primaryTextColor_Forest">#000000</color>
+    <color name="secondaryTextColor_Forest">#ffffff</color>
 </resources>

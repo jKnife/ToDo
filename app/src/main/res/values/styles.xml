@@ -1,11 +1,20 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Forest" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primaryColor_Forest</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor_Forest</item>
+        <item name="colorAccent">@color/secondaryColor_Forest</item>
+        <item name="android:windowBackground">@color/secondaryColor_Forest</item>
+    </style>
+
+    <style name="Beach" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primaryColor_Beach</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor_Beach</item>
+        <item name="colorAccent">@color/secondaryColor_Beach</item>
+        <item name="android:windowBackground">@color/secondaryColor_Beach</item>
     </style>
 
 </resources>
