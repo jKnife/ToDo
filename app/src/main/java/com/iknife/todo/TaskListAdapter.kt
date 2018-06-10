@@ -9,11 +9,11 @@ import com.iknife.todo.database.TaskData
 import com.iknife.todo.database.TasksDatabase
 import kotlinx.android.synthetic.main.task_entry.view.*
 
-class TaskListAdapter(private val tasksCollection : MutableList<Task>) : RecyclerView.Adapter<TaskListAdapter.TaskHolder>(){
+class TaskListAdapter(private val tasksCollection : MutableList<Task>, private val database: TasksDatabase?, private val updateFunction: () -> Unit) : RecyclerView.Adapter<TaskListAdapter.TaskHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskListAdapter.TaskHolder{
         val inflatedView = parent.inflate(R.layout.task_entry, false)
-        return TaskHolder(inflatedView)
+        return TaskHolder(inflatedView, database, tasksCollection, this, updateFunction)
     }
 
     override fun getItemCount(): Int = tasksCollection.size
@@ -42,7 +42,7 @@ class TaskListAdapter(private val tasksCollection : MutableList<Task>) : Recycle
         tasksCollection.removeAt(position)
     }
 
-    class TaskHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    class TaskHolder(v: View, private val database: TasksDatabase?, private val tasksCollection: MutableList<Task>, private val adapter: TaskListAdapter, private val updateFunction: () -> Unit) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         private val context: Context = v.context
         private var view = v
@@ -53,7 +53,31 @@ class TaskListAdapter(private val tasksCollection : MutableList<Task>) : Recycle
         }
 
         override fun onClick(v: View?){
-            //Item on click
+            val newTask : Task = tasksCollection.first { it == task }
+            Log.i("COMPLETE", "Pre toggle $newTask")
+            newTask.toggleCompleted()
+            Log.i("COMPLETE", "Post toggle $newTask")
+
+            database?.tasksDataDao()?.addTask(newTask.toTaskData())
+            Log.i("COMPLETE", "Pre add $newTask")
+            tasksCollection.add(newTask)
+            Log.i("COMPLETE", "Post add $newTask")
+
+            val oldTaskPosition = if(!task.completed){
+                tasksCollection.indexOf(task)+1
+            } else {
+                tasksCollection.indexOf(task)-1
+            }
+
+            Log.i("COMPLETE", "oldTaskPosition $oldTaskPosition")
+
+            adapter.notifyItemRemoved(oldTaskPosition)
+            Log.i("COMPLETE", "Pre remove ${tasksCollection.first { it == task }}")
+            tasksCollection.remove(tasksCollection.first { it == task })
+            Log.i("COMPLETE", "Post remove ${tasksCollection.first { it == task }}")
+
+
+            updateFunction()
         }
 
         companion object {
