@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         //Setup Sectioned list
         val sections = arrayListOf<SimpleSectionedRecyclerViewAdapter.Section>()
-        if (tasksList.size > 0) sections.add(SimpleSectionedRecyclerViewAdapter.Section(0, "To Do"))
+        if (tasksList.size > 0 && firstCompleted != 0) sections.add(SimpleSectionedRecyclerViewAdapter.Section(0, "To Do"))
         if (firstCompleted != -1) sections.add(SimpleSectionedRecyclerViewAdapter.Section(firstCompleted, "Completed"))
 
 
