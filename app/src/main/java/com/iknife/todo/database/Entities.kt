@@ -7,6 +7,6 @@ import android.arch.persistence.room.PrimaryKey
 @Entity
 data class TaskData(
         @PrimaryKey(autoGenerate = true) var id: Long?,
-        @ColumnInfo(name = "label") var label: String
-    ){
-}
+        @ColumnInfo(name = "label") var label: String,
+        @ColumnInfo(name = "completed") var completed: Boolean
+    )
