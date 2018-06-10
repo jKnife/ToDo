@@ -6,17 +6,30 @@
     android:id="@+id/drawer_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
-    android:orientation="vertical">
-    
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/primaryColor_Beach"
+            android:theme="@style/Beach" />
+    </FrameLayout>
+
     <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         app:headerLayout="@layout/drawer_header"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:menu="@menu/drawer_menu"
-        android:background="@color/cardview_light_background"
+        android:fitsSystemWindows="true"
+        android:background="@color/secondaryColor_Beach"
         android:layout_gravity="start">
-
-
     </android.support.design.widget.NavigationView>
 
     <android.support.v7.widget.RecyclerView
@@ -24,7 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:paddingTop="10dp"
+        android:paddingTop="?android:attr/actionBarSize"
+        android:layout_marginTop="10dp"
         android:clipToPadding="false"
         android:paddingBottom="@dimen/input_bar_height"/>
 
