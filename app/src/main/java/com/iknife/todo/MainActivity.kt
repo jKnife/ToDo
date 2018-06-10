@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
                 database.tasksDataDao().addTask(TaskData(null, input, false))
                 tasksList.add(Task(tasksList.size.toLong(), input, false))
                 input_bar.text.clear()
+                updateSections(sections, task_list.adapter as SimpleSectionedRecyclerViewAdapter, database)
             }
             handled
         }
@@ -93,9 +94,11 @@ class MainActivity : AppCompatActivity() {
 
         val firstCompleted = tasksList.indexOfFirst { it.completed }
 
-        if (firstCompleted == 0) {
-            sections.removeAt(sections.indexOfFirst { it.title == "To Do" })
-        } else if (sections.indexOfFirst { it.title == "To Do" } == -1) {
+        if (firstCompleted == 0 || tasksList.isEmpty()) {
+            if (sections.indexOfFirst { it.title == "To Do" } != -1) {
+                sections.removeAt(sections.indexOfFirst { it.title == "To Do" })
+            }
+        } else if (sections.indexOfFirst { it.title == "To Do" } == -1 && tasksList.isNotEmpty()) {
             sections.add(0, SimpleSectionedRecyclerViewAdapter.Section(0, "To Do"))
         }
 
@@ -106,7 +109,9 @@ class MainActivity : AppCompatActivity() {
                 sections.add(SimpleSectionedRecyclerViewAdapter.Section(firstCompleted, "Completed"))
             }
         } else {
-            sections.removeAt(sections.indexOfFirst { it.title == "Completed" })
+            if (sections.indexOfFirst { it.title == "Completed" } != -1){
+                sections.removeAt(sections.indexOfFirst { it.title == "Completed" })
+            }
         }
 
         val dummy = arrayOfNulls<SimpleSectionedRecyclerViewAdapter.Section>(sections.size)
