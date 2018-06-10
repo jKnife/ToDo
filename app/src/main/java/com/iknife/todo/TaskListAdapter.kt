@@ -26,10 +26,12 @@ class TaskListAdapter(private val tasksCollection : MutableList<Task>, private v
     }
 
     fun removeTask(position: Int, database: TasksDatabase?){
-        Log.e("TasksDatabase", "Deleting task id:${tasksCollection[position].id}")
-        database?.tasksDataDao()?.deleteTask(TaskData(tasksCollection[position].id, tasksCollection[position].label, tasksCollection[position].completed))
+        val task = tasksCollection[position-1]
+        Log.e("TasksDatabase", "Deleting task: $task")
+        database?.tasksDataDao()?.deleteTask(task.toTaskData())
         notifyItemRemoved(position)
-        tasksCollection.removeAt(position)
+        tasksCollection.removeAt(tasksCollection.indexOfFirst { it == task })
+        updateFunction()
     }
 
     fun completeTask(position: Int, database: TasksDatabase?){
