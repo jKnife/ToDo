@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         //Get database instance
         val database = TasksDatabase.getInstance(this)
 
@@ -39,8 +38,8 @@ class MainActivity : AppCompatActivity() {
 
         //Setup Sectioned list
         val sections = arrayListOf<SimpleSectionedRecyclerViewAdapter.Section>()
-        if (tasksList.size > 0 && firstCompleted != 0) sections.add(SimpleSectionedRecyclerViewAdapter.Section(0, "To Do"))
-        if (firstCompleted != -1) sections.add(SimpleSectionedRecyclerViewAdapter.Section(firstCompleted, "Completed"))
+        if (tasksList.size > 0 && firstCompleted != 0) sections.add(SimpleSectionedRecyclerViewAdapter.Section(0, getString(R.string.to_do)))
+        if (firstCompleted != -1) sections.add(SimpleSectionedRecyclerViewAdapter.Section(firstCompleted, getString(R.string.completed)))
 
 
         //Setup RecyclerView
@@ -95,22 +94,22 @@ class MainActivity : AppCompatActivity() {
         val firstCompleted = tasksList.indexOfFirst { it.completed }
 
         if (firstCompleted == 0 || tasksList.isEmpty()) {
-            if (sections.indexOfFirst { it.title == "To Do" } != -1) {
-                sections.removeAt(sections.indexOfFirst { it.title == "To Do" })
+            if (sections.indexOfFirst { it.title == getString(R.string.to_do) } != -1) {
+                sections.removeAt(sections.indexOfFirst { it.title == getString(R.string.to_do) })
             }
-        } else if (sections.indexOfFirst { it.title == "To Do" } == -1 && tasksList.isNotEmpty()) {
-            sections.add(0, SimpleSectionedRecyclerViewAdapter.Section(0, "To Do"))
+        } else if (sections.indexOfFirst { it.title == getString(R.string.to_do) } == -1 && tasksList.isNotEmpty()) {
+            sections.add(0, SimpleSectionedRecyclerViewAdapter.Section(0, getString(R.string.to_do)))
         }
 
         if (firstCompleted != -1) {
-            if (sections.indexOfFirst { it.title == "Completed" } != -1) {
-                sections[sections.indexOfFirst { it.title == "Completed" }] = SimpleSectionedRecyclerViewAdapter.Section(firstCompleted, "Completed")
+            if (sections.indexOfFirst { it.title == getString(R.string.completed) } != -1) {
+                sections[sections.indexOfFirst { it.title == getString(R.string.completed) }] = SimpleSectionedRecyclerViewAdapter.Section(firstCompleted, getString(R.string.completed))
             } else {
-                sections.add(SimpleSectionedRecyclerViewAdapter.Section(firstCompleted, "Completed"))
+                sections.add(SimpleSectionedRecyclerViewAdapter.Section(firstCompleted, getString(R.string.completed)))
             }
         } else {
-            if (sections.indexOfFirst { it.title == "Completed" } != -1){
-                sections.removeAt(sections.indexOfFirst { it.title == "Completed" })
+            if (sections.indexOfFirst { it.title == getString(R.string.completed) } != -1){
+                sections.removeAt(sections.indexOfFirst { it.title == getString(R.string.completed) })
             }
         }
 
