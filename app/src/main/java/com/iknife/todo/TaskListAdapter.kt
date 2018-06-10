@@ -26,11 +26,15 @@ class TaskListAdapter(private val tasksCollection : MutableList<Task>, private v
     }
 
     fun removeTask(position: Int, database: TasksDatabase?){
-        val task = tasksCollection[position-1]
+        val task: Task = try {
+            tasksCollection[position-1]
+        } catch (e: IndexOutOfBoundsException) {
+            tasksCollection[position-2]
+        }
         Log.e("TasksDatabase", "Deleting task: $task")
         database?.tasksDataDao()?.deleteTask(task.toTaskData())
         notifyItemRemoved(position)
-        tasksCollection.removeAt(tasksCollection.indexOfFirst { it == task })
+        tasksCollection.remove(task)
         updateFunction()
     }
 
