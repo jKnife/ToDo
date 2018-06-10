@@ -92,7 +92,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         val firstCompleted = tasksList.indexOfFirst { it.completed }
-        if (firstCompleted != -1) sections[1] = (SimpleSectionedRecyclerViewAdapter.Section(firstCompleted, "Completed"))
+
+        if (firstCompleted == 0) {
+            sections.removeAt(sections.indexOfFirst { it.title == "To Do" })
+        } else if (sections.indexOfFirst { it.title == "To Do" } == -1) {
+            sections.add(0, SimpleSectionedRecyclerViewAdapter.Section(0, "To Do"))
+        }
+
+        if (firstCompleted != -1) {
+            if (sections.indexOfFirst { it.title == "Completed" } != -1) {
+                sections[sections.indexOfFirst { it.title == "Completed" }] = SimpleSectionedRecyclerViewAdapter.Section(firstCompleted, "Completed")
+            } else {
+                sections.add(SimpleSectionedRecyclerViewAdapter.Section(firstCompleted, "Completed"))
+            }
+        } else {
+            sections.removeAt(sections.indexOfFirst { it.title == "Completed" })
+        }
 
         val dummy = arrayOfNulls<SimpleSectionedRecyclerViewAdapter.Section>(sections.size)
         adapter.setSections(sections.toArray(dummy))
