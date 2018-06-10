@@ -1,5 +1,6 @@
 package com.iknife.todo
 
+import android.graphics.Canvas
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -55,10 +56,17 @@ class MainActivity : AppCompatActivity() {
         mSectionedAdapter.setSections(sections.toArray(dummy))
 
         task_list.adapter = mSectionedAdapter
+
         //Implement fling callback
         val flingCallback = object : FlingToDeleteCallback() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+                if (sections.any { it.sectionedPosition == viewHolder!!.adapterPosition }) return
                 adapter.removeTask(viewHolder!!.adapterPosition, database)
+            }
+
+            override fun onChildDraw(c: Canvas?, recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+                if (sections.any { it.sectionedPosition == viewHolder!!.adapterPosition }) return
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             }
         }
         //Attach Touch Helper to Recycler View
