@@ -2,7 +2,7 @@ package com.iknife.todo
 
 import com.iknife.todo.database.TaskData
 
-class Task(val id: Long, val label: String, var completed: Boolean){
+data class Task(val id: Long, val label: String, var completed: Boolean){
     fun toggleCompleted() {
         this.completed = completed.not()
     }
